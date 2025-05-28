@@ -31,11 +31,11 @@ const LandingPage = () => {
         <>
             {/* Hero Section */}
             <div className="min-h-[90vh] bg-gradient-to-r from-purple-300 to-pink-100 flex flex-col-reverse sm:flex-row items-center justify-between px-4 md:px-16 py-12 overflow-hidden relative">
-                <img src="https://cdn-icons-png.flaticon.com/512/4290/4290854.png" alt="Sparkle" className="w-12 h-12 md:w-16 md:h-16 absolute top-10 right-6 md:right-16 animate-bounce opacity-70" />
+                <img src="https://cdn-icons-png.flaticon.com/512/4290/4290854.png" alt="Sparkle" className="w-10 h-10 xs:w-12 xs:h-12  md:w-16 md:h-16 absolute top-10 right-6 md:right-16 animate-bounce opacity-70" />
                 <img src="https://cdn-icons-png.flaticon.com/512/833/833472.png" alt="Heart" className="w-8 h-8 md:w-10 md:h-10 absolute bottom-6 left-4 md:left-8 animate-bounce opacity-70" />
 
                 {/* Text Section */}
-                <div className="md:w-1/2 text-center md:text-left space-y-6 z-10">
+                <div className="md:w-1/2 text-center md:text-left space-y-6 z-10 mb-5">
                     <span className="inline-block bg-yellow-300 text-yellow-900 text-sm md:text-md px-4 py-1 rounded-full font-semibold tracking-wide shadow-sm">
                         🔥 Trending Now
                     </span>
@@ -64,9 +64,15 @@ const LandingPage = () => {
                 </div>
 
                 {/* Image Section */}
-                <div className="sm:w-1/2 flex justify-center mt-8 md:mt-0">
-                    <img src="/img/modal.png" alt="Fashion Banner" className="w-full max-w-md sm:max-w-4xl pt-20 rounded-xl transition-transform duration-500 hover:scale-105" />
+
+                <div className="sm:w-1/2 flex justify-center items-center z-10">
+                    <img
+                        src="/img/modal.png"
+                        alt="Fashion"
+                        className="w-full max-w-md sm:max-w-4xl rounded-xl transition-transform duration-500 hover:scale-105 object-contain"
+                    />
                 </div>
+
             </div>
 
             {/* Promotional Feature Cards */}
