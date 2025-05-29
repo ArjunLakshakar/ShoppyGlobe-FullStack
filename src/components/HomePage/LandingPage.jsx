@@ -2,9 +2,10 @@ import { faCodeBranch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { faShippingFast, faMoneyBillWave, faGift, faHeadset } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const LandingPage = () => {
+    const navigate = useNavigate();
 
     const data = [{
         heading: "Free Shipping",
@@ -48,7 +49,7 @@ const LandingPage = () => {
                     <p className="text-lg sm:text-xl lg:text-xl text-gray-700 font-medium">
                         Prices starting from <span className="font-bold text-gray-900">$19.99</span>
                     </p>
-                    <button className="inline-block bg-pink-600 hover:bg-pink-500 text-white text-base md:text-lg font-semibold px-4 md:px-8 py-2 md:py-3 rounded-full transition duration-300 shadow-lg hover:shadow-2xl">
+                    <button onClick={() => navigate('/products')} className="inline-block bg-pink-600 hover:bg-pink-500 text-white text-base md:text-lg font-semibold px-4 md:px-8 py-2 md:py-3 rounded-full transition duration-300 shadow-lg hover:shadow-2xl">
                         Shop Now
                     </button>
                     <div className="flex flex-wrap gap-4 pt-4 justify-center md:justify-start text-sm sm:text-base text-gray-700">
@@ -75,7 +76,8 @@ const LandingPage = () => {
 
             </div>
 
-            {/* Promotional Feature Cards */}
+
+            {/* Feature Cards */}
             <section className='p-6 bg-pink-100'>
                 <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
                     {["/img/watch.png", "/img/bag.png", "/img/band.png"].map((img, idx) => (
@@ -88,12 +90,13 @@ const LandingPage = () => {
                                     {["Smart Digital Watch", "Leather Handbag", "Fitness Tracker Band"][idx]}
                                 </h3>
                                 <p className='text-lg sm:text-2xl md:text-3xl'>Starting at <span className='font-bold'>${["39.99", "9.00", "19.29"][idx]}</span></p>
-                                <a href="#" className='inline-flex items-center justify-center sm:justify-start text-base sm:text-xl md:text-2xl text-white hover:underline'>Shop Now <span className='ml-1'>&rarr;</span></a>
+                                <Link to="/products" state={{ label: ["Watch", "Handbag", "Fitness Tracker Band"][idx] }} className='inline-flex items-center justify-center sm:justify-start text-base sm:text-xl md:text-2xl text-white hover:underline'>Shop Now <span className='ml-1'>&rarr;</span></Link>
                             </div>
                         </div>
                     ))}
                 </div>
             </section>
+
 
             {/* Categories Section */}
             <section className='p-6 md:p-8 bg-gray-50'>
@@ -108,6 +111,7 @@ const LandingPage = () => {
                 </div>
             </section>
 
+
             {/* Info Section */}
             <section className='flex flex-col sm:flex-row flex-wrap bg-blue-500 p-6 rounded-lg shadow-md justify-around mx-4 sm:mx-8 my-8 gap-6'>
                 {data.map((item, index) => (
@@ -121,12 +125,13 @@ const LandingPage = () => {
                 ))}
             </section>
 
+
             {/* Testimonials Section */}
             <section className='p-6 md:p-8 bg-pink-100'>
                 <h2 className='text-2xl md:text-3xl font-bold text-center text-gray-700 mb-6'>What Our Clients Say..</h2>
                 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
                     {[{
-                        name: "Arjun L.",
+                        name: "Arjun Lakshakar",
                         text: "The quality is amazing. Got my dress in 2 days! It fits perfectly and the fabric feels premium. Definitely shopping again!",
                         rating: 5,
                         img: "/img/user1.jpg"

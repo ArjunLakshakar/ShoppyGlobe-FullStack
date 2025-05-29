@@ -1,22 +1,46 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../redux/cartSlice';
 
 const ProductDetails = () => {
-    const location = useLocation();
-    const { product } = location.state || {};
+    const { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [product, setProduct] = useState(null);
+    const [selectedImage, setSelectedImage] = useState('');
+    const [error, setError] = useState(null);
 
+    // Get product form location state 
+    // const location = useLocation();
+    // const { product } = location.state || {};
+
+    // Fetch product data based on ID
     useEffect(() => {
         window.scrollTo(0, 0);
-    }, []);
+        const fetchProduct = async () => {
+            try {
+                const res = await fetch(`https://dummyjson.com/products/${id}`);
+                if (!res.ok) {
+                    throw new Error("Product not found");
+                }
+                const data = await res.json();
+                setProduct(data);
+                setSelectedImage(data.thumbnail);
+            } catch (err) {
+                setError("Failed to load product details.");
+            }
+        };
+        fetchProduct();
+    }, [id]);
 
-    const [selectedImage, setSelectedImage] = useState(product?.thumbnail || '');
+
+    if (error) {
+        return <div className="text-center py-20 text-red-600 text-xl min-h-screen bg-pink-100 italic">{error}</div>;
+    }
 
     if (!product) {
-        return <div className="text-center py-20 text-xl">No product data available.</div>;
+        return <div className="text-center py-20 text-xl min-h-screen bg-pink-100 italic">No product data available.</div>;
     }
 
     return (
@@ -37,7 +61,6 @@ const ProductDetails = () => {
 
                 {/* Image Gallery + Info */}
                 <div className="flex flex-col lg:flex-row gap-6">
-                    {/* Images */}
                     <div className="w-full lg:w-1/2 space-y-4">
                         <img
                             src={selectedImage}

@@ -3,17 +3,17 @@ import { useDispatch } from "react-redux";
 import { addItemToCart } from "../redux/cartSlice";
 import ProductItem from "./ProductItem";
 import { useLocation, useParams } from "react-router-dom";
+import useFetchProducts from "./hooks/useFetchProducts";
 
 const ProductList = () => {
-  const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
-  const [categories, setCategories] = useState([]);
   const dispatch = useDispatch();
-
   const location = useLocation();
 
-  // ✅ Set search query from Link state once on mount
+  const Api = "https://dummyjson.com/products?limit=1000";
+  const { products, categories, error } = useFetchProducts(Api);
+
   useEffect(() => {
     if (location.state?.label) {
       setSearchQuery(location.state.label);
@@ -21,25 +21,12 @@ const ProductList = () => {
     window.scrollTo(0, 0);
   }, [location.state]);
 
-  useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const res = await fetch("https://dummyjson.com/products?limit=1000");
-        const data = await res.json();
-        const filtered = data.products.filter(p => p.category !== "groceries");
-        setProducts(filtered);
-        setCategories(['all', ...new Set(filtered.map(p => p.category))]);
-      } catch (error) {
-        console.error("Failed to fetch products:", error);
-      }
-    }
-    fetchProducts();
-  }, []);
 
   const handleAddToCart = (product) => {
     dispatch(addItemToCart(product));
   };
 
+  // Filter products based on selected category and search query
   const filtered = products.filter(p => {
     const matchesCategory = selectedCategory === "all" || p.category === selectedCategory;
     const matchesSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase());
@@ -51,7 +38,7 @@ const ProductList = () => {
       <div className="max-w-7xl mx-auto mb-6">
         {/* Heading */}
         <h1 className="text-4xl font-bold text-gray-800 text-center mb-6 font-serif"
-          >PRODUCT CATALOG</h1>
+        >PRODUCT CATALOG</h1>
 
         {/* Category & Search Filter */}
         <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-4 mb-6">
@@ -89,12 +76,28 @@ const ProductList = () => {
           />
         </div>
 
+        {/* Error Message */}
+        {error && (
+          <p className="text-red-600 text-center mb-4 text-xl font-semibold">
+            Failed to load products: {error}
+          </p>
+        )}
+
+
         {/* Product Grid */}
-        <div className="grid grid-cols-1 xsm:grid-cols-2 lg:grid-cols-3 llg:grid-cols-4 gap-6">
-          {filtered.map(product => (
-            <ProductItem product={product} key={product.id} onAddToCart={handleAddToCart} />
-          ))}
-        </div>
+        {!error && (
+          filtered.length !== 0 ?
+            <div className="grid grid-cols-1 xsm:grid-cols-2 lg:grid-cols-3 llg:grid-cols-4 gap-6">
+              {filtered.map(product => (
+                <ProductItem product={product} key={product.id} onAddToCart={handleAddToCart} />
+              ))}
+            </div>
+            :
+            <div className=" text-center text-gray-500 text-xl italic mt-10">
+              No products found matching your search.
+            </div>
+        )}
+
       </div>
     </div>
   );

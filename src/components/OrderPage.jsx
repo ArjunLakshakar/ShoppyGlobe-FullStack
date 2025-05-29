@@ -11,8 +11,8 @@ const OrderPage = () => {
             {
                 items.length === 0 ? (
                     <>
-                        <div className='bg-gradient-to-r from-purple-200 to-pink-100 p-2'>
-                            <div className='max-w-6xl bg-gray-100 mx-auto min-h-[90vh] mt-6 flex flex-col p-4'>
+                        <div className='bg-gradient-to-r from-purple-200 to-pink-100 p-2 '>
+                            <div className='max-w-6xl bg-gray-100 mx-auto min-h-screen mt-6 flex flex-col p-4'>
                                 <h1 className="xs:text-4xl text-2xl font-serif   font-semibold text-center my-6 bg-gradient-to-r from-blue-700 via-green-600 to-purple-600 bg-clip-text text-transparent">
                                     ORDERS HISTORY
                                 </h1>
@@ -22,8 +22,9 @@ const OrderPage = () => {
                         </div>
                     </>
                 ) : (
-                    <div className='bg-gradient-to-r from-purple-200 to-pink-100 p-2'>
-                        <div className='max-w-6xl mx-auto p-6 bg-gray-100  rounded-lg shadow-lg'>
+                    // Order History
+                    <div className='bg-gradient-to-r from-purple-200 to-pink-100 p-2 '>
+                        <div className='max-w-6xl mx-auto p-6 bg-gray-100  min-h-screen rounded-lg shadow-lg'>
 
                             <div className='xs:flex-row flex flex-col  max-w-5xl mx-auto justify-between items-center mb-2'>
                                 <h1 className="xs:text-4xl text-2xl font-serif   font-semibold text-center my-6 bg-gradient-to-r from-blue-700 via-green-600 to-purple-600 bg-clip-text text-transparent">
@@ -36,7 +37,7 @@ const OrderPage = () => {
                             <Banner />
 
                             {items.map((item, index) => (
-                                <div key={index} className='bg-white rounded-xl py-4 xs:flex-row flex flex-col  items-center xs:gap-10 gap-4 m-4 shadow-md p-4 hover:scale-105 transition-transform duration-300'>
+                                <div key={index} className='bg-white rounded-xl py-4 xsm:flex-row flex flex-col  items-center xsm:gap-10 gap-4 m-4 shadow-md p-4 hover:scale-105 transition-transform duration-300'>
                                     <div>
                                         <img src={item.thumbnail} alt={item.title} className='w-24 h-24 object-cover rounded' />
                                     </div>
@@ -46,7 +47,7 @@ const OrderPage = () => {
                                         <p className='text-gray-500'>Quantity: {item.quantity}</p>
                                     </div>
 
-                                    <div className='xs:ml-auto flex flex-col items-center gap-3'>
+                                    <div className='xsm:ml-auto flex flex-col items-center gap-3'>
                                         <button className='bg-green-500 text-white px-4 py-2 rounded'>Ordered Successfully</button>
                                         <p className='text-gray-400 text-sm'>Date: {item.date}</p>
                                     </div>

@@ -3,15 +3,13 @@ import { Link } from 'react-router-dom';
 
 const ProductItem = ({ product, onAddToCart }) => {
     return (
+        // Create a card for each product
         <div>
             <div key={product.id} className="bg-purple-100 p-4 rounded-lg shadow hover:shadow-xl">
                 <Link to={`/productDetails/${product.id}`} state={{ product }}>
                     <img src={product.thumbnail} alt={product.title} className="w-full h-60 rounded mb-3 transition-transform duration-500 hover:scale-115 " />
                     <h3 className="text-lg font-semibold text-gray-800">{product.title}</h3>
                     <p className="text-sm text-gray-600 line-clamp-2">{product.description}</p>
-
-
-
                 </Link>
                 <div className='flex flex-row justify-between items-center'>
                     <div>

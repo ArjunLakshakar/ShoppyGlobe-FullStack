@@ -19,7 +19,6 @@ const CheckOut = ({
     function paymentHandler() {
         setPaymentDone(true);
         cartItems.map((item) => dispatch(addOrderToHistory(item)));
-
         dispatch(clearCart());
     }
 
@@ -27,6 +26,7 @@ const CheckOut = ({
         <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center px-4 z-50">
             <div className="bg-white p-4 sm:p-6 rounded-lg shadow-xl w-full max-w-md text-center relative">
                 {!paymentDone ? (
+                    // Payment Form
                     <>
                         <h2 className="text-xl sm:text-2xl font-bold mb-3">Payment Summary</h2>
 
@@ -43,7 +43,7 @@ const CheckOut = ({
                             ))}
                         </div>
 
-                        <div className="text-left text-sm sm:text-base space-y-2 text-gray-700 my-3">
+                        <div className="text-left text-sm sm:text-base space-y-2 text-gray-700 border-t my-3">
                             <p>Subtotal: <span className="float-right">${subtotal.toFixed(2)}</span></p>
                             <p>Tax (8%): <span className="float-right">${tax}</span></p>
                             <p>Delivery: <span className="float-right">{deliveryFee ? `$${deliveryFee}` : "Free"}</span></p>
@@ -87,6 +87,7 @@ const CheckOut = ({
                         </button>
                     </>
                 ) : (
+                    // Payment Success Message  
                     <>
                         <h2 className="text-xl sm:text-2xl font-bold text-green-600 mb-4">Payment Successful!</h2>
                         <p className="text-gray-700 text-sm sm:text-base mb-2">

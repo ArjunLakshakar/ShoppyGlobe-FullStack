@@ -1,8 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { removeItemFromCart, addItemToCart, decreaseItemQuantity } from '../redux/cartSlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash} from '@fortawesome/free-solid-svg-icons';
 
-const CartItem = ({ item }) => {
+
+function CartItem ({ item }) {
     const dispatch = useDispatch();
 
     return (
@@ -13,29 +16,33 @@ const CartItem = ({ item }) => {
                 <p className="text-gray-600 line-clamp-2">{item.description}</p>
                 <p className="text-green-600 font-semibold">${item.price}</p>
 
-                <div className="flex items-center mt-2 gap-2">
+                <div className="flex items-center justify-between mt-2 gap-2">
+                    <div>
+                        <button
+                            onClick={() => dispatch(addItemToCart(item))}
+                            className="px-3 py-1 bg-gray-200 rounded hover:bg-green-400"
+                        >
+                            +
+                        </button>
+                        <span className="px-3">{item.quantity}</span>
+                        <button
+                            onClick={() => dispatch(decreaseItemQuantity(item.id))}
+                            className="px-3 py-1 bg-gray-200 rounded hover:bg-red-400"
+                        >
+                            -
+                        </button>
+                    </div>
                     <button
-                        onClick={() => dispatch(addItemToCart(item))}
-                        className="px-3 py-1 bg-gray-200 rounded hover:bg-green-400"
+                        onClick={() => dispatch(removeItemFromCart(item.id))}
+                        className="bg-red-500 text-white xs:p-2 p-1 rounded-lg hover:bg-red-500 transition-colors duration-300 "
                     >
-                        +
-                    </button>
-                    <span className="px-2">{item.quantity}</span>
-                    <button
-                        onClick={() => dispatch(decreaseItemQuantity(item.id))}
-                        className="px-3 py-1 bg-gray-200 rounded hover:bg-red-400"
-                    >
-                        -
+                        {/* Remove */}
+                        <FontAwesomeIcon icon={faTrash} className="h-5 w-5" />
                     </button>
                 </div>
             </div>
 
-            <button
-                onClick={() => dispatch(removeItemFromCart(item.id))}
-                className="bg-red-500 text-white px-3 py-1 rounded"
-            >
-                Remove
-            </button>
+
         </div>
     );
 };

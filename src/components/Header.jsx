@@ -44,8 +44,7 @@ const Header = () => {
                     <FontAwesomeIcon icon={faTruck} />
                     <p className='text-xs'>Orders</p>
                 </NavLink>
-                {/* Keep GitHub as normal link since it's external */}
-                <a href="https://github.com/ArjunLakshakar" className="text-3xl hover:text-purple-200">
+                <a href="https://github.com/ArjunLakshakar/ShoppyGlobe" target='_blank' className="text-3xl hover:text-purple-200">
                     <FontAwesomeIcon icon={faGithub} />
                 </a>
 
@@ -73,9 +72,9 @@ const Header = () => {
                         <Link to="/orderHistory" className="hover:text-purple-500 flex items-center gap-2" onClick={closeMenu}>
                             <FontAwesomeIcon icon={faTruck} /> Orders
                         </Link>
-                        <Link to="https://github.com/ArjunLakshakar" className="hover:text-purple-500 " onClick={closeMenu}>
+                        <a href="https://github.com/ArjunLakshakar/ShoppyGlobe" target='_blank' className="hover:text-purple-500 " onClick={closeMenu}>
                             <FontAwesomeIcon icon={faGithub} /> GitHub
-                        </Link>
+                        </a>
                     </nav>
                 </div>
             )}
