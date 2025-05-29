@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export const Footer = () => {
     return (
@@ -15,10 +16,10 @@ export const Footer = () => {
                 <div>
                     <h4 className="text-xl font-semibold mb-4">Quick Links</h4>
                     <ul className="space-y-2 text-md text-gray-600">
-                        <li><a href="#" className="hover:text-white">Home</a></li>
-                        <li><a href="/products" className="hover:text-white">Shop</a></li>
-                        <li><a href="/cart" className="hover:text-white">Cart</a></li>
-                        <li><a href="/orderHistory" className="hover:text-white">Orders</a></li>
+                        <li><Link to="/" className="hover:text-purple-600">Home</Link></li>
+                        <li><Link to="/products" className="hover:text-purple-600">Shop</Link></li>
+                        <li><Link to="/cart" className="hover:text-purple-600">Cart</Link></li>
+                        <li><Link to="/orderHistory" className="hover:text-purple-600">Orders</Link></li>
                     </ul>
                 </div>
 
@@ -26,10 +27,10 @@ export const Footer = () => {
                 <div>
                     <h4 className="text-xl font-semibold mb-4">Categories</h4>
                     <ul className="space-y-2 text-md text-gray-600">
-                        <li><a href="/products" className="hover:text-white">Men’s Clothing</a></li>
-                        <li><a href="/products" className="hover:text-white">Women’s Clothing</a></li>
-                        <li><a href="/products" className="hover:text-white">Shoes</a></li>
-                        <li><a href="/products" className="hover:text-white">Accessories</a></li>
+                        <li><Link to="/products" className="hover:text-purple-600">Men’s Clothing</Link></li>
+                        <li><Link to="/products" className="hover:text-purple-600">Women’s Clothing</Link></li>
+                        <li><Link to="/products" className="hover:text-purple-600">Shoes</Link></li>
+                        <li><Link to="/products" className="hover:text-purple-600">Accessories</Link></li>
                     </ul>
                 </div>
 

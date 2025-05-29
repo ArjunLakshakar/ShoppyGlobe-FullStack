@@ -50,15 +50,15 @@ const ProductList = () => {
     <div className="min-h-screen bg-gradient-to-r from-purple-200 to-pink-100 p-6">
       <div className="max-w-7xl mx-auto mb-6">
         {/* Heading */}
-        <h1 className="text-4xl font-bold text-gray-800 text-center mb-6"
-          style={{ fontFamily: 'Oleo Script, serif' }}>PRODUCT CATALOG</h1>
+        <h1 className="text-4xl font-bold text-gray-800 text-center mb-6 font-serif"
+          >PRODUCT CATALOG</h1>
 
         {/* Category & Search Filter */}
         <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-4 mb-6">
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="w-full md:w-60 px-4 py-2 rounded focus:outline-none text-xl border-2 border-white"
+            className="w-full md:w-60 px-4 py-2 rounded-full focus:outline-none text-xl border-2 border-white"
           >
             {categories.map((cat, i) => (
               <option key={i} value={cat}>
@@ -72,7 +72,7 @@ const ProductList = () => {
             placeholder="Search products..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="flex-1 px-4 py-2 rounded md:w-40 focus:outline-none text-xl border-2 border-white"
+            className="flex-1 px-4 py-2 md:w-40 focus:outline-none text-xl border-2 border-white rounded-full"
           />
         </div>
 
@@ -90,7 +90,7 @@ const ProductList = () => {
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 xsm:grid-cols-2 lg:grid-cols-3 llg:grid-cols-4 gap-6">
           {filtered.map(product => (
             <ProductItem product={product} key={product.id} onAddToCart={handleAddToCart} />
           ))}

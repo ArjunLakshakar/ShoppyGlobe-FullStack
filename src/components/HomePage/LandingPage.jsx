@@ -123,26 +123,27 @@ const LandingPage = () => {
 
             {/* Testimonials Section */}
             <section className='p-6 md:p-8 bg-pink-100'>
-                <h2 className='text-2xl md:text-3xl font-bold text-center text-gray-700 mb-6'>What Our Clients Say</h2>
+                <h2 className='text-2xl md:text-3xl font-bold text-center text-gray-700 mb-6'>What Our Clients Say..</h2>
                 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
                     {[{
-                        name: "Sarah M.",
+                        name: "Arjun L.",
                         text: "The quality is amazing. Got my dress in 2 days! It fits perfectly and the fabric feels premium. Definitely shopping again!",
                         rating: 5,
                         img: "/img/user1.jpg"
                     }, {
-                        name: "James T.",
+                        name: "Aaman P.",
                         text: "Excellent service and fast delivery. Their support team resolved my issue in minutes. Very satisfied with the purchase!",
                         rating: 4,
                         img: "/img/user2.jpg"
                     }, {
-                        name: "Emily R.",
+                        name: "Pranav G.",
                         text: "Love the trendy collections every season! I always find something new and exciting. Great prices and style.",
                         rating: 5,
                         img: "/img/user3.jpg"
                     }].map((review, i) => (
-                        <div key={i} className='bg-gray-100 p-6 rounded-lg shadow text-center'>
-                            <img src={review.img} alt={review.name} className='w-12 h-12 mx-auto rounded-full mb-4' />
+                        <div key={i} className='bg-gray-100 p-6 rounded-lg shadow text-center italic'>
+                            {/* <img src={review.img} alt={review.name} className='w-12 h-12 mx-auto rounded-full mb-4' /> */}
+
                             <p className='italic mb-2'>"{review.text}"</p>
                             <div className='text-yellow-500 text-lg mb-2'>
                                 {"⭐".repeat(review.rating)}{"☆".repeat(5 - review.rating)}

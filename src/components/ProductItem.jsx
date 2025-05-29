@@ -13,7 +13,7 @@ const ProductItem = ({ product, onAddToCart }) => {
 
 
                 </Link>
-                <div className='flex flex-col  xs:flex justify-between items-center'>
+                <div className='flex flex-row justify-between items-center'>
                     <div>
                         <p className="text-pink-600 font-bold mt-2">${product.price}</p>
                         <p className="text-yellow-500">{"⭐".repeat(Math.round(product.rating))}</p>
@@ -21,7 +21,7 @@ const ProductItem = ({ product, onAddToCart }) => {
 
                     <button
                         onClick={() => onAddToCart(product)}
-                        className="mt-2 h-8 py-1 px-3 bg-blue-600 text-white rounded hover:bg-green-500"
+                        className="mt-2 h-8 py-1 px-3  bg-blue-600 text-white rounded hover:bg-green-500"
                     >
                         Add to Cart
                     </button>

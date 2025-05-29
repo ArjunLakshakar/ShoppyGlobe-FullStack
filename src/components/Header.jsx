@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -32,19 +34,21 @@ const Header = () => {
 
             {/* Desktop Nav */}
             <nav className="hidden sm:flex md:space-x-14 space-x-7 md:text-2xl text-xl font-bold">
-                <Link to="/" className="hover:text-white">Home</Link>
-                <Link to="/products" className="hover:text-white">Products</Link>
-                <Link to="/cart" className="flex flex-col items-center hover:text-white">
+                <NavLink to="/" className={({ isActive }) => isActive ? "text-purple-700 font-bold" : "hover:text-purple-200"}>Home</NavLink>
+                <NavLink to="/products" className={({ isActive }) => isActive ? "text-purple-700 font-bold" : "hover:text-purple-200"}>Products</NavLink>
+                <NavLink to="/cart" className={({ isActive }) => isActive ? "text-purple-700 font-bold flex flex-col items-center" : "hover:text-purple-200 flex flex-col items-center"}>
                     <FontAwesomeIcon icon={faCartShopping} />
                     <p className='text-xs'>Cart</p>
-                </Link>
-                <Link to="/orderHistory" className="flex flex-col items-center hover:text-white">
+                </NavLink>
+                <NavLink to="/orderHistory" className={({ isActive }) => isActive ? "text-purple-700 font-bold flex flex-col items-center" : "hover:text-purple-200 flex flex-col items-center"}>
                     <FontAwesomeIcon icon={faTruck} />
                     <p className='text-xs'>Orders</p>
-                </Link>
-                <Link to="https://github.com/ArjunLakshakar" className="text-3xl hover:text-white">
+                </NavLink>
+                {/* Keep GitHub as normal link since it's external */}
+                <a href="https://github.com/ArjunLakshakar" className="text-3xl hover:text-purple-200">
                     <FontAwesomeIcon icon={faGithub} />
-                </Link>
+                </a>
+
             </nav>
 
             {/* Mobile Sidebar Overlay */}

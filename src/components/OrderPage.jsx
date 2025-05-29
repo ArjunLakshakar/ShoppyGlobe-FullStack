@@ -13,7 +13,7 @@ const OrderPage = () => {
                     <>
                         <div className='bg-gradient-to-r from-purple-200 to-pink-100 p-2'>
                             <div className='max-w-6xl bg-gray-100 mx-auto min-h-[90vh] mt-6 flex flex-col p-4'>
-                                <h1 className="xs:text-4xl text-2xl font-bold text-center my-6 bg-gradient-to-r from-blue-700 via-green-600 to-purple-600 bg-clip-text text-transparent">
+                                <h1 className="xs:text-4xl text-2xl font-serif   font-semibold text-center my-6 bg-gradient-to-r from-blue-700 via-green-600 to-purple-600 bg-clip-text text-transparent">
                                     ORDERS HISTORY
                                 </h1>
                                 <Banner />
@@ -26,7 +26,7 @@ const OrderPage = () => {
                         <div className='max-w-6xl mx-auto p-6 bg-gray-100  rounded-lg shadow-lg'>
 
                             <div className='xs:flex-row flex flex-col  max-w-5xl mx-auto justify-between items-center mb-2'>
-                                <h1 className="xs:text-4xl text-2xl font-bold text-center my-6 bg-gradient-to-r from-blue-700 via-green-600 to-purple-600 bg-clip-text text-transparent">
+                                <h1 className="xs:text-4xl text-2xl font-serif   font-semibold text-center my-6 bg-gradient-to-r from-blue-700 via-green-600 to-purple-600 bg-clip-text text-transparent">
                                     ORDERS HISTORY
                                 </h1>
 
@@ -47,7 +47,7 @@ const OrderPage = () => {
                                     </div>
 
                                     <div className='xs:ml-auto flex flex-col items-center gap-3'>
-                                        <button className='bg-green-500 text-white px-4 py-2 rounded'>Order Successfully</button>
+                                        <button className='bg-green-500 text-white px-4 py-2 rounded'>Ordered Successfully</button>
                                         <p className='text-gray-400 text-sm'>Date: {item.date}</p>
                                     </div>
                                 </div>

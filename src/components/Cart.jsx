@@ -17,7 +17,7 @@ const Cart = () => {
         return (
             <div className='bg-gradient-to-r from-purple-200 to-pink-100 p-2'>
                 <div className="p-6 max-w-6xl mx-auto min-h-[90vh] bg-gray-100 flex flex-col">
-                    <h1 className="text-3xl sm:text-4xl     font-bold mb-6">SHOPPING CART </h1>
+                    <h1 className="text-3xl sm:text-4xl  font-serif   font-bold mb-6">SHOPPING CART </h1>
                     <Banner />
                     <div className="text-gray-500 m-auto">Cart is empty.</div>
                 </div>
@@ -28,7 +28,7 @@ const Cart = () => {
     return (
         <div className='bg-gradient-to-r from-purple-200 to-pink-100 p-2'>
             <div className="p-4 sm:p-6 max-w-6xl mx-auto min-h-screen bg-gray-100 rounded-lg">
-                <h1 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-6 text-center sm:text-left">SHOPPING CART</h1>
+                <h1 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-6 text-center font-serif   sm:text-left">SHOPPING CART</h1>
 
                 {/* Promo Banner */}
                 <Banner />
