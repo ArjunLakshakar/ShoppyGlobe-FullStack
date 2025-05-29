@@ -7,6 +7,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -31,19 +32,19 @@ const Header = () => {
 
             {/* Desktop Nav */}
             <nav className="hidden sm:flex md:space-x-14 space-x-7 md:text-2xl text-xl font-bold">
-                <a href="/" className="hover:text-white">Home</a>
-                <a href="/products" className="hover:text-white">Products</a>
-                <a href="/cart" className="flex flex-col items-center hover:text-white">
+                <Link to="/" className="hover:text-white">Home</Link>
+                <Link to="/products" className="hover:text-white">Products</Link>
+                <Link to="/cart" className="flex flex-col items-center hover:text-white">
                     <FontAwesomeIcon icon={faCartShopping} />
                     <p className='text-xs'>Cart</p>
-                </a>
-                <a href="/orderHistory" className="flex flex-col items-center hover:text-white">
+                </Link>
+                <Link to="/orderHistory" className="flex flex-col items-center hover:text-white">
                     <FontAwesomeIcon icon={faTruck} />
                     <p className='text-xs'>Orders</p>
-                </a>
-                <a href="https://github.com/ArjunLakshakar" className="text-3xl hover:text-white">
+                </Link>
+                <Link to="https://github.com/ArjunLakshakar" className="text-3xl hover:text-white">
                     <FontAwesomeIcon icon={faGithub} />
-                </a>
+                </Link>
             </nav>
 
             {/* Mobile Sidebar Overlay */}
@@ -60,17 +61,17 @@ const Header = () => {
                     </div>
 
                     <nav className="flex flex-col space-y-6 text-xl font-semibold ">
-                        <a href="/" className="hover:text-purple-500" onClick={closeMenu}>Home</a>
-                        <a href="/products" className="hover:text-purple-500" onClick={closeMenu}>Products</a>
-                        <a href="/cart" className="hover:text-purple-500 flex items-center gap-2" onClick={closeMenu}>
+                        <Link to="/" className="hover:text-purple-500" onClick={closeMenu}>Home</Link>
+                        <Link to="/products" className="hover:text-purple-500" onClick={closeMenu}>Products</Link>
+                        <Link to="/cart" className="hover:text-purple-500 flex items-center gap-2" onClick={closeMenu}>
                             <FontAwesomeIcon icon={faCartShopping} /> Cart
-                        </a>
-                        <a href="/orderHistory" className="hover:text-purple-500 flex items-center gap-2" onClick={closeMenu}>
+                        </Link>
+                        <Link to="/orderHistory" className="hover:text-purple-500 flex items-center gap-2" onClick={closeMenu}>
                             <FontAwesomeIcon icon={faTruck} /> Orders
-                        </a>
-                        <a href="https://github.com/ArjunLakshakar" className="hover:text-purple-500 " onClick={closeMenu}>
+                        </Link>
+                        <Link to="https://github.com/ArjunLakshakar" className="hover:text-purple-500 " onClick={closeMenu}>
                             <FontAwesomeIcon icon={faGithub} /> GitHub
-                        </a>
+                        </Link>
                     </nav>
                 </div>
             )}
