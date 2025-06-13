@@ -15,7 +15,7 @@ const ProductList = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const Api = "http://localhost:3000/products";
+  const Api = "https://shoppyglobe-fullstack.onrender.com/products";
   // For temporary
   //  const Api = "https://dummyjson.com/products?limit=100";
   const { products, categories, error } = useFetchProducts(Api);
@@ -42,7 +42,7 @@ const ProductList = () => {
       }
       console.log("Sending to cart:", { productId: product._id, quantity: 1 });
 
-      await axios.post("http://localhost:3000/cart", { productId: product._id, quantity: 1, }, {
+      await axios.post("https://shoppyglobe-fullstack.onrender.com/cart", { productId: product._id, quantity: 1, }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

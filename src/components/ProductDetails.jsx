@@ -26,7 +26,7 @@ const ProductDetails = () => {
         const fetchProduct = async () => {
             try {
                 setLoading(true);
-                const res = await axios.get(`http://localhost:3000/products/${id}`);
+                const res = await axios.get(`https://shoppyglobe-fullstack.onrender.com/products/${id}`);
                 const prod = res.data.product;
                 setProduct(prod);
                 setIsAdded(prod.addedToCart || false);
@@ -55,7 +55,7 @@ const ProductDetails = () => {
                 return;
             }
 
-            const response = await axios.get('http://localhost:3000/getCartItems', {
+            const response = await axios.get('https://shoppyglobe-fullstack.onrender.com/getCartItems', {
                 headers: { Authorization: `Bearer ${token}` },
             });
 
@@ -82,7 +82,7 @@ const ProductDetails = () => {
             }
 
             await axios.post(
-                "http://localhost:3000/cart",
+                "https://shoppyglobe-fullstack.onrender.com/cart",
                 { productId: product._id, quantity: 1 },
                 { headers: { Authorization: `Bearer ${token}` } }
             );

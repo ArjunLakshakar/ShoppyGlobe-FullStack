@@ -29,7 +29,7 @@ const Cart = () => {
                 // navigate('/login');
                 return;
             }
-            const response = await axios.get('http://localhost:3000/getCartItems', {
+            const response = await axios.get('https://shoppyglobe-fullstack.onrender.com/getCartItems', {
                 headers: { Authorization: `Bearer ${token}` }
             });
             const items = response.data.items || response.data;
@@ -42,7 +42,7 @@ const Cart = () => {
     async function handleClearCart() {
         try {
             const token = localStorage.getItem('token');
-            await axios.delete('http://localhost:3000/clearCart', {
+            await axios.delete('https://shoppyglobe-fullstack.onrender.com/clearCart', {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setCartItems([]);

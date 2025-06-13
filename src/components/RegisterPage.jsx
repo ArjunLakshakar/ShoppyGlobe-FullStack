@@ -21,7 +21,7 @@ function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3000/register', formData);
+      await axios.post('https://shoppyglobe-fullstack.onrender.com/register', formData);
       successNotification("Registration Successful", "Your account has been created! 🎉");
       setFormData({ username: '', email: '', password: '' }); // Clear form
       navigate('/login'); // Redirect to login

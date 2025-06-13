@@ -31,7 +31,7 @@ const CheckOut = ({
 
         try {
             const response = await axios.post(
-                'http://localhost:3000/addToHistory',
+                'https://shoppyglobe-fullstack.onrender.com/addToHistory',
                 { items: cartItems }, // ✅ Fix: wrap it properly
                 {
                     headers: {

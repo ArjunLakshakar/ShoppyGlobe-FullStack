@@ -24,7 +24,7 @@ function LoginPage() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3000/login', formData);
+      const response = await axios.post('https://shoppyglobe-fullstack.onrender.com/login', formData);
       successNotification("Login Successful", "Welcome back! Happy shopping 🛍️");
 
       storeTokenWithExpiry(response.data.token);

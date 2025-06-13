@@ -8,7 +8,7 @@ function CartItem({ item, updateLocalQuantity, removeItemLocally }) {
     async function updateQuantity(id, newQuantity) {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.put(`http://localhost:3000/updateQuantity/${id}`, { quantity: newQuantity }, {
+            const response = await axios.put(`https://shoppyglobe-fullstack.onrender.com/updateQuantity/${id}`, { quantity: newQuantity }, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -23,7 +23,7 @@ function CartItem({ item, updateLocalQuantity, removeItemLocally }) {
     async function handleRemoveItem(id) {
         try {
             const token = localStorage.getItem('token');
-            await axios.delete(`http://localhost:3000/removeCartItem/${id}`, {
+            await axios.delete(`https://shoppyglobe-fullstack.onrender.com/removeCartItem/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             removeItemLocally(id);

@@ -23,7 +23,7 @@ const OrderPage = () => {
                 // navigate('/login');
                 return;
             }
-            const response = await axios.get("http://localhost:3000/getOders", {
+            const response = await axios.get("https://shoppyglobe-fullstack.onrender.com/getOders", {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -41,7 +41,7 @@ const OrderPage = () => {
         try {
             const token = localStorage.getItem('token');
 
-            const response = await axios.delete("http://localhost:3000/clearHistory", {
+            const response = await axios.delete("https://shoppyglobe-fullstack.onrender.com/clearHistory", {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
