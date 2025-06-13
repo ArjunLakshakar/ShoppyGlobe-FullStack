@@ -1,8 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { clearToken, isTokenValid } from './hooks/auth';
-import { errorNotification } from './hooks/NotificationService';
 
 const ProductItem = ({ product, onAddToCart }) => {
 
@@ -14,21 +11,22 @@ const ProductItem = ({ product, onAddToCart }) => {
                     <h3 className="text-lg font-semibold text-gray-800">{product.title}</h3>
                     <p className="text-sm text-gray-600 line-clamp-2">{product.description}</p>
                     <p className="text-pink-600 font-bold mt-2">${product.price}</p>
-                </Link>
-                <div className='flex flex-row justify-between items-center'>
-                    <div>
-                        <p className="text-yellow-500">{"⭐".repeat(Math.round(product.rating))}</p>
+
+                    <div className='flex flex-row justify-between items-center'>
+                        <div>
+                            <p className="text-yellow-500">{"⭐".repeat(Math.round(product.rating))}</p>
+                        </div>
+
+                        <button
+                            onClick={() => navigate(`/products/${product._id}`)}
+                            className="inline-flex items-center gap-2 hover:text-purple-600  text-purple-800 rounded-3xl px-3 py-2 transition duration-200"
+                        >
+                            View Item
+                            <span className="text-xl ">→</span>
+                        </button>
+
                     </div>
-
-                    <button
-                        onClick={() => navigate(`/products/${product._id}`)}
-                        className="inline-flex items-center gap-2 hover:text-purple-600  text-purple-800 rounded-3xl px-3 py-2 transition duration-200"
-                    >
-                        View Item
-                        <span className="text-xl ">→</span>
-                    </button>
-
-                </div>
+                </Link>
             </div>
         </div>
     );

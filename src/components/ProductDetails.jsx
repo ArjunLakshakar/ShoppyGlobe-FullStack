@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../redux/cartSlice';
 import axios from 'axios';
@@ -10,6 +10,9 @@ const ProductDetails = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    // const location = useLocation();
+    // const { product } = location.state || {};
 
     const [product, setProduct] = useState(null);
     const [selectedImage, setSelectedImage] = useState('');
@@ -196,10 +199,10 @@ const ProductDetails = () => {
                             disabled={isAdded || product.stock <= 0}
                             onClick={() => handleAddToCart(product)}
                             className={`mt-2 h-8 py-1 px-3 rounded text-white ${product.stock <= 0
-                                    ? 'bg-red-400 cursor-not-allowed'
-                                    : isAdded
-                                        ? 'bg-gray-400 cursor-not-allowed'
-                                        : 'bg-blue-600 hover:bg-green-500'
+                                ? 'bg-red-400 cursor-not-allowed'
+                                : isAdded
+                                    ? 'bg-gray-400 cursor-not-allowed'
+                                    : 'bg-blue-600 hover:bg-green-500'
                                 }`}
 
                         >

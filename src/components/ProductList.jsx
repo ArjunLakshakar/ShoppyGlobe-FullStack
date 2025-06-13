@@ -16,6 +16,7 @@ const ProductList = () => {
   const navigate = useNavigate();
 
   const Api = "http://localhost:3000/products";
+  //  const Api = "https://dummyjson.com/products?limit=100";
   const { products, categories, error } = useFetchProducts(Api);
 
   useEffect(() => {

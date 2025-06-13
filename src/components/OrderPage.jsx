@@ -20,7 +20,7 @@ const OrderPage = () => {
         try {
             const token = localStorage.getItem('token');
             if (!checkAuth()) {
-                navigate('/login');
+                // navigate('/login');
                 return;
             }
             const response = await axios.get("http://localhost:3000/getOders", {
