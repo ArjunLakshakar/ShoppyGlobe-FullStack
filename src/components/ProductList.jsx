@@ -15,9 +15,9 @@ const ProductList = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // const Api = "http://localhost:3000/products";
+  const Api = "http://localhost:3000/products";
   // For temporary
-   const Api = "https://dummyjson.com/products?limit=100";
+  //  const Api = "https://dummyjson.com/products?limit=100";
   const { products, categories, error } = useFetchProducts(Api);
 
   useEffect(() => {
