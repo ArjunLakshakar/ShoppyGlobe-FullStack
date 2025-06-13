@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addOrderToHistory, clearCart } from '../redux/cartSlice';
+import axios from 'axios';
+import CartItem from './CartItem';
+import { errorNotification } from './hooks/NotificationService';
 
 const CheckOut = ({
+    setCartItems,
     cartItems,
     setShowModal,
     paymentDone,
@@ -16,11 +20,34 @@ const CheckOut = ({
     const discount = paymentMethod !== 'cod' ? +(subtotal * 0.3).toFixed(2) : 0;
     const finalTotal = (subtotal + tax + deliveryFee - discount).toFixed(2);
 
-    function paymentHandler() {
-        setPaymentDone(true);
-        cartItems.map((item) => dispatch(addOrderToHistory(item)));
-        dispatch(clearCart());
+    // function paymentHandler() {
+    //     setPaymentDone(true);
+    //     cartItems.map((item) => dispatch(addOrderToHistory(item)));
+    //     dispatch(clearCart());
+    // }
+
+    async function paymentHandler() {
+        const token = localStorage.getItem('token');
+
+        try {
+            const response = await axios.post(
+                'http://localhost:3000/addToHistory',
+                { items: cartItems }, // ✅ Fix: wrap it properly
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            setPaymentDone(true);
+            setCartItems([]);
+        } catch (error) {
+            console.error('Error placing order:', error.response?.data || error.message);
+            errorNotification("Stock Unavailable", `${error.response?.data?.message}. Please check back later.`);
+        }
     }
+
+
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center px-4 z-50">
@@ -37,7 +64,7 @@ const CheckOut = ({
                             </div>
                             {cartItems.map((item, i) => (
                                 <div key={i} className="flex justify-between text-gray-600">
-                                    <p>{item.title}</p>
+                                    <p>{item.productId.title}</p>
                                     <p>{item.quantity}</p>
                                 </div>
                             ))}

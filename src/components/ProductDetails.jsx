@@ -1,39 +1,102 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../redux/cartSlice';
+import axios from 'axios';
+import { errorNotification, successNotification } from './hooks/NotificationService';
+import { clearToken, isTokenValid } from './hooks/auth';
 
 const ProductDetails = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
     const [product, setProduct] = useState(null);
     const [selectedImage, setSelectedImage] = useState('');
     const [error, setError] = useState(null);
-
-    // Get product form location state 
-    // const location = useLocation();
-    // const { product } = location.state || {};
+    const [isAdded, setIsAdded] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     // Fetch product data based on ID
     useEffect(() => {
         window.scrollTo(0, 0);
         const fetchProduct = async () => {
             try {
-                const res = await fetch(`https://dummyjson.com/products/${id}`);
-                if (!res.ok) {
-                    throw new Error("Product not found");
-                }
-                const data = await res.json();
-                setProduct(data);
-                setSelectedImage(data.thumbnail);
+                setLoading(true);
+                const res = await axios.get(`http://localhost:3000/products/${id}`);
+                const prod = res.data.product;
+                setProduct(prod);
+                setIsAdded(prod.addedToCart || false);
+                setSelectedImage(prod.thumbnail || prod.images[0]);
+                setLoading(false);
             } catch (err) {
                 setError("Failed to load product details.");
+                setLoading(false);
             }
         };
         fetchProduct();
     }, [id]);
 
+    // Fetch cart items after product is available
+    useEffect(() => {
+        if (product?._id) {
+            fetchCartItems();
+        }
+    }, [product]);
+
+    const fetchCartItems = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            if (!token || !isTokenValid()) {
+                clearToken();
+                return;
+            }
+
+            const response = await axios.get('http://localhost:3000/getCartItems', {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+
+            const items = response.data.items || response.data;
+            const exists = items.some(item => item.productId._id === product._id);
+            setIsAdded(exists);
+        } catch (err) {
+            console.error('Error fetching cart items:', err.message);
+        }
+    };
+
+    const handleAddToCart = async (product) => {
+        try {
+            const token = localStorage.getItem("token");
+
+            if (!token) {
+                clearToken();
+                errorNotification("Not Logged In", "Please log in to add items to cart.");
+                return;
+            } else if (!isTokenValid()) {
+                clearToken();
+                errorNotification("Session Expired", "Please log in again to add items to cart.");
+                return;
+            }
+
+            await axios.post(
+                "http://localhost:3000/cart",
+                { productId: product._id, quantity: 1 },
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+
+            dispatch(addItemToCart({ ...product, quantity: 1 }));
+            setIsAdded(true);
+            successNotification("Added to Cart", `${product.title} has been added to your cart.`);
+        } catch (error) {
+            console.error("Add to Cart Error:", error);
+            const message = error.response?.data?.message || error.message;
+            errorNotification("Add to Cart Failed", message);
+        }
+    };
+
+    if (loading) {
+        return <div className="text-center py-20 text-xl min-h-screen bg-pink-100 italic">Loading product details...</div>;
+    }
 
     if (error) {
         return <div className="text-center py-20 text-red-600 text-xl min-h-screen bg-pink-100 italic">{error}</div>;
@@ -97,7 +160,16 @@ const ProductDetails = () => {
 
                         <div className="text-sm sm:text-base space-y-1">
                             <p><strong>Category:</strong> {product.category}</p>
-                            <p><strong>Availability:</strong> {product.availabilityStatus}</p>
+                            <p>
+                                <strong>
+                                    {product.stock > 0 ? (
+                                        "Availability: In Stock"
+                                    ) : (
+                                        <span className="text-red-600">Stock Not Available </span>
+                                    )}
+                                </strong>
+                            </p>
+
                             <p><strong>Shipping:</strong> {product.shippingInformation}</p>
                             <p><strong>Return Policy:</strong> {product.returnPolicy}</p>
                             <p><strong>Warranty:</strong> {product.warrantyInformation}</p>
@@ -121,11 +193,23 @@ const ProductDetails = () => {
                         </div>
 
                         <button
-                            onClick={() => dispatch(addItemToCart(product))}
-                            className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-green-500 transition-all"
+                            disabled={isAdded || product.stock <= 0}
+                            onClick={() => handleAddToCart(product)}
+                            className={`mt-2 h-8 py-1 px-3 rounded text-white ${product.stock <= 0
+                                    ? 'bg-red-400 cursor-not-allowed'
+                                    : isAdded
+                                        ? 'bg-gray-400 cursor-not-allowed'
+                                        : 'bg-blue-600 hover:bg-green-500'
+                                }`}
+
                         >
-                            Add to Cart
+                            {isAdded
+                                ? "Added to Cart"
+                                : product.stock <= 0
+                                    ? "Out of Stock"
+                                    : "Add to Cart"}
                         </button>
+
                     </div>
                 </div>
 
@@ -146,7 +230,6 @@ const ProductDetails = () => {
                         ))}
                     </div>
                 </div>
-
             </div>
         </div>
     );

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { successNotification } from './hooks/NotificationService';
 
 export const Footer = () => {
     return (
@@ -43,9 +44,13 @@ export const Footer = () => {
                             type="email"
                             placeholder="Enter your email"
                             className="px-4 py-2 rounded-md text-black focus:outline-none"
+                            required
                         />
                         <button
-                            type="submit"
+                            // type="submit"
+                            onClick={()=>{
+                                successNotification("Subscribe", "Subscription completed successfully.");
+                            } }
                             className="bg-pink-500 hover:bg-pink-400 text-white px-4 py-2 rounded-md transition"
                         >
                             Subscribe
