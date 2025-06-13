@@ -14,10 +14,15 @@ const app = express();
 const port = process.env.PORT || 3000;
 app.use(cors());
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// mongoose.connect(process.env.MONGODB_URI, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
+
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('Connected to MongoDB Atlas'))
+  .catch(err => console.error('MongoDB connection error:', err));
+
 
 const db = mongoose.connection;
 db.on('error', (err) => console.error('MongoDB connection error:', err));

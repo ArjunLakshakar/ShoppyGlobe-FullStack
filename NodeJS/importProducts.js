@@ -2,8 +2,11 @@ import mongoose from "mongoose";
 import Product from "./Model/Product.js";
 import fetch from "node-fetch";
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 // Connect to MongoDB
-mongoose.connect("mongodb://localhost:27017", {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
